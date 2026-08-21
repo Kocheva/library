@@ -1,0 +1,33 @@
+{
+  "tools": [
+    {
+      "id": "program_constructor",
+      "title": "Конструктор программы",
+      "site_mode": "native",
+      "local_xlsx": "tools/xlsx/program-constructor.xlsx",
+      "google_url": "https://docs.google.com/spreadsheets/d/1Bps7Tc7y92weIKWN1qlVxgXNVLFb1G1qmyF6hDaqkZU/edit?usp=sharing"
+    },
+    {
+      "id": "preparation_plan",
+      "title": "План подготовки",
+      "site_mode": "native_personal_and_google_collaborative",
+      "local_xlsx": "tools/xlsx/preparation-plan.xlsx",
+      "google_url": "https://docs.google.com/spreadsheets/d/15j5mgoghk5MHY-ZPMmnCwTmmBAGn2pomtwavbuixBio/edit?usp=sharing"
+    },
+    {
+      "id": "partners_register",
+      "title": "Реестр партнёров",
+      "site_mode": "template_and_google_collaborative",
+      "local_xlsx": "tools/xlsx/partners-register.xlsx",
+      "google_url": "https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing"
+    },
+    {
+      "id": "event_budget",
+      "title": "Бюджет мероприятия",
+      "site_mode": "native_personal_and_google_collaborative",
+      "local_xlsx": "tools/xlsx/budget.xlsx",
+      "google_url": "https://docs.google.com/spreadsheets/d/19An8k5DxcDUnxBA4VS9_pG0BAJ1CqyZ72Ul18y0cO0Q/edit?usp=sharing",
+      "normalization_status": "ready"
+    }
+  ]
+}

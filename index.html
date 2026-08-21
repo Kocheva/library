@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e51a4b">
+  <meta name="description" content="Форматы, программа, план подготовки, бюджет и практические материалы Делай-саммита.">
+  <meta property="og:title" content="Библиотека организатора Делай-саммита">
+  <meta property="og:description" content="Форматы, программа и материалы для организаторов Делай-саммита.">
+  <meta property="og:image" content="assets/images/social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Библиотека организатора Делай-саммита</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="brand" type="button" data-route="home" aria-label="На главную">
+        <span class="brand-pill">ДЕЛАЙ-САММИТ</span>
+        <span class="brand-context">Библиотека организатора</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav">Меню</button>
+      <nav class="main-nav" id="mainNav" aria-label="Основная навигация">
+        <button type="button" data-route="formats">Форматы и программа</button>
+        <button type="button" data-route="guide">Подготовка</button>
+        <button type="button" data-route="rescue">Спасти саммит</button>
+        <a href="https://kocheva.github.io/map/" target="_blank" rel="noopener">Карта лидеров <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="route-page active" id="route-home" data-page="home">
+      <div class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">БИБЛИОТЕКА ОРГАНИЗАТОРА</p>
+            <h1>Соберите Делай-саммит от идеи до результата</h1>
+            <p class="hero-lead">Выберите форматы, сформируйте программу, распределите задачи и используйте готовые сценарии и чек-листы.</p>
+            <div class="hero-actions">
+              <button class="button primary" type="button" data-route="formats">Собрать программу <span aria-hidden="true">→</span></button>
+              <button class="button secondary" type="button" data-route="guide">Начать подготовку</button>
+            </div>
+            <div class="hero-facts" aria-label="Состав библиотеки">
+              <span><strong>112</strong> форматов</span>
+              <span><strong>12</strong> этапов</span>
+              <span><strong>59</strong> решений сложных ситуаций</span>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <img src="assets/images/background.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="page-surface">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">ЧЕТЫРЕ МАРШРУТА</p>
+              <h2>Что вы хотите сделать?</h2>
+            </div>
+            <p>Можно начать с любого раздела и вернуться к остальным позже.</p>
+          </div>
+          <div class="route-grid">
+            <button class="route-card" type="button" data-route="formats">
+              <span class="route-number">01</span>
+              <span class="route-title">Собрать программу</span>
+              <span class="route-description">Найти форматы по задачам и собрать расписание по дням.</span>
+              <span class="route-link">Открыть конструктор →</span>
+            </button>
+            <button class="route-card" type="button" data-route="guide">
+              <span class="route-number">02</span>
+              <span class="route-title">Подготовить саммит</span>
+              <span class="route-description">Пройти 12 этапов, распределить задачи и рассчитать бюджет.</span>
+              <span class="route-link">Перейти к плану →</span>
+            </button>
+            <button class="route-card" type="button" data-route="rescue">
+              <span class="route-number">03</span>
+              <span class="route-title">Спасти Делай-саммит</span>
+              <span class="route-description">Быстро найти решение, если что-то пошло не по плану.</span>
+              <span class="route-link">Найти решение →</span>
+            </button>
+            <a class="route-card map-card" href="https://kocheva.github.io/map/" target="_blank" rel="noopener">
+              <span class="route-number">04</span>
+              <span class="route-title">Найти лидера или эксперта</span>
+              <span class="route-description">Карта ведущих, наставников и носителей практик проекта.</span>
+              <span class="route-link">Открыть карту ↗</span>
+            </a>
+          </div>
+
+          <section class="start-strip">
+            <div>
+              <p class="eyebrow">РЕКОМЕНДУЕМЫЙ СТАРТ</p>
+              <h2>До саммита осталось меньше двух месяцев?</h2>
+              <p>Сначала откройте план подготовки: он покажет задачи по срокам и поможет назначить ответственных.</p>
+            </div>
+            <button class="button dark" type="button" data-route="guide" data-guide-view="plan">Открыть план задач</button>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="route-page" id="route-formats" data-page="formats">
+      <div class="compact-hero">
+        <div class="container compact-hero-inner">
+          <div>
+            <p class="eyebrow">МАРШРУТ 01</p>
+            <h1>Форматы и программа</h1>
+            <p>Отберите подходящие активности, изучите сценарии и соберите расписание саммита.</p>
+          </div>
+          <div class="compact-stat"><strong id="programCountHero">0</strong><span>форматов в программе</span></div>
+        </div>
+      </div>
+      <div class="page-surface">
+        <div class="container">
+          <div class="segmented" role="tablist" aria-label="Форматы и программа">
+            <button class="active" type="button" data-format-view="catalog" role="tab">Каталог форматов</button>
+            <button type="button" data-format-view="program" role="tab">Моя программа <span class="count-badge" id="programCountTab">0</span></button>
+          </div>
+
+          <div id="catalogView">
+            <div class="search-panel">
+              <label class="search-field">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input id="formatSearch" type="search" placeholder="Название, задача, описание или аудитория" autocomplete="off">
+                <span class="search-count" id="formatResultCount"></span>
+              </label>
+              <div class="filter-row">
+                <label>Тематическая линия<select id="lineFilter"><option value="">Все линии</option></select></label>
+                <label>Задача<select id="taskFilter"><option value="">Все задачи</option></select></label>
+                <label>Место<select id="placeFilter"><option value="">Любое место</option></select></label>
+                <button class="text-button" id="clearFormatFilters" type="button">Сбросить</button>
+              </div>
+            </div>
+            <div class="catalog-layout">
+              <div>
+                <div class="results-head"><h2>Подходящие форматы</h2><span id="materialHint"></span></div>
+                <div class="format-grid" id="formatGrid"></div>
+                <button class="button secondary load-more" id="loadMoreFormats" type="button">Показать ещё</button>
+              </div>
+              <aside class="selection-card" aria-label="Текущая подборка">
+                <p class="eyebrow">ВАША ПОДБОРКА</p>
+                <div class="selection-total"><strong id="selectionCount">0</strong><span>форматов выбрано</span></div>
+                <div class="selection-preview" id="selectionPreview"></div>
+                <button class="button primary full" type="button" data-format-view="program">Собрать расписание</button>
+                <button class="text-button full" id="clearSelection" type="button">Очистить подборку</button>
+              </aside>
+            </div>
+          </div>
+
+          <div id="programView" hidden>
+            <div class="builder-head">
+              <div><p class="eyebrow">КОНСТРУКТОР</p><h2>Моя программа</h2><p>Укажите день, время, продолжительность и площадку. Порядок можно менять стрелками.</p></div>
+              <div class="builder-actions">
+                <button class="button secondary" id="exportProgram" type="button">Скачать CSV</button>
+                <button class="button primary" id="printProgram" type="button">Печать / PDF</button>
+              </div>
+            </div>
+            <div class="program-empty empty-state" id="programEmpty">
+              <strong>Подборка пока пуста</strong>
+              <p>Вернитесь в каталог и добавьте форматы, которые подходят задачам саммита.</p>
+              <button class="button primary" type="button" data-format-view="catalog">Выбрать форматы</button>
+            </div>
+            <div class="program-list" id="programList"></div>
+            <div class="program-summary" id="programSummary"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="route-page" id="route-guide" data-page="guide">
+      <div class="compact-hero">
+        <div class="container compact-hero-inner">
+          <div>
+            <p class="eyebrow">МАРШРУТ 02</p>
+            <h1>Подготовка Делай-саммита</h1>
+            <p>Методическое руководство, рабочий план, бюджет и реестр партнёров в одном месте.</p>
+          </div>
+          <div class="compact-stat"><strong id="planProgressHero">0%</strong><span>задач выполнено</span></div>
+        </div>
+      </div>
+      <div class="page-surface">
+        <div class="container">
+          <div class="segmented guide-tabs" role="tablist" aria-label="Инструменты подготовки">
+            <button class="active" type="button" data-guide-view="manual">Руководство</button>
+            <button type="button" data-guide-view="plan">План задач</button>
+            <button type="button" data-guide-view="budget">Бюджет</button>
+            <button type="button" data-guide-view="partners">Партнёры</button>
+          </div>
+
+          <div class="guide-view" id="manualView">
+            <div class="guide-layout">
+              <aside class="stage-nav" id="stageNav" aria-label="Этапы подготовки"></aside>
+              <article class="manual-card" id="stageContent"></article>
+            </div>
+          </div>
+
+          <div class="guide-view" id="planView" hidden>
+            <div class="tool-heading">
+              <div><p class="eyebrow">33 ЗАДАЧИ</p><h2>Рабочий план подготовки</h2><p>Статусы и ответственные сохраняются только на этом устройстве.</p></div>
+              <div class="tool-actions"><a class="button secondary" href="tools/xlsx/preparation-plan.xlsx" download>Скачать XLSX</a><a class="button ghost" href="https://docs.google.com/spreadsheets/d/15j5mgoghk5MHY-ZPMmnCwTmmBAGn2pomtwavbuixBio/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
+            </div>
+            <div class="progress-card"><div><span>Общий прогресс</span><strong id="planProgressText">0 из 33</strong></div><div class="progress-track"><span id="planProgressBar"></span></div></div>
+            <div class="plan-filters"><input id="planSearch" type="search" placeholder="Поиск по задачам"><select id="planStatusFilter"><option value="">Все статусы</option><option value="not_started">Не начато</option><option value="in_progress">В работе</option><option value="blocked">Заблокировано</option><option value="done">Выполнено</option></select></div>
+            <div class="plan-groups" id="planGroups"></div>
+          </div>
+
+          <div class="guide-view" id="budgetView" hidden>
+            <div class="tool-heading">
+              <div><p class="eyebrow">КАЛЬКУЛЯТОР</p><h2>Бюджет мероприятия</h2><p>Изменяйте значения — итог пересчитается автоматически и сохранится в браузере.</p></div>
+              <div class="tool-actions"><a class="button secondary" href="tools/xlsx/budget.xlsx" download>Скачать XLSX</a><a class="button ghost" href="https://docs.google.com/spreadsheets/d/19An8k5DxcDUnxBA4VS9_pG0BAJ1CqyZ72Ul18y0cO0Q/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
+            </div>
+            <div class="budget-kpis">
+              <label class="budget-limit">Лимит бюджета<input id="budgetLimit" type="number" min="0" step="1000"></label>
+              <div><span>Общая потребность</span><strong id="budgetNeed">0 ₽</strong></div>
+              <div><span>Вклад партнёров</span><strong id="budgetPartners">0 ₽</strong></div>
+              <div><span>Нужно из бюджета</span><strong id="budgetRequired">0 ₽</strong></div>
+              <div id="budgetBalanceCard"><span>Остаток</span><strong id="budgetBalance">0 ₽</strong></div>
+            </div>
+            <div class="table-scroll"><table class="budget-table"><thead><tr><th>Статья расходов</th><th>Количество</th><th>Стоимость</th><th>Потребность</th><th>Вклад партнёров</th><th>Из бюджета</th><th></th></tr></thead><tbody id="budgetRows"></tbody></table></div>
+            <div class="row-actions"><button class="button secondary" id="addBudgetRow" type="button">+ Добавить статью</button><button class="text-button" id="resetBudget" type="button">Вернуть пример</button></div>
+          </div>
+
+          <div class="guide-view" id="partnersView" hidden>
+            <div class="tool-heading">
+              <div><p class="eyebrow">РАБОТА С ПАРТНЁРАМИ</p><h2>Реестр партнёров</h2><p>Пример структуры для учёта вклада, обязательств, контактов и статусов.</p></div>
+              <div class="tool-actions"><a class="button secondary" href="tools/xlsx/partners-register.xlsx" download>Скачать XLSX</a><a class="button ghost" href="https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
+            </div>
+            <label class="search-field partner-search"><span class="search-icon" aria-hidden="true">⌕</span><input id="partnerSearch" type="search" placeholder="Найти партнёра или вклад"></label>
+            <div class="partner-grid" id="partnerGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="route-page" id="route-rescue" data-page="rescue">
+      <div class="compact-hero rescue-hero">
+        <div class="container compact-hero-inner">
+          <div>
+            <p class="eyebrow">МАРШРУТ 03</p>
+            <h1>Спасти Делай-саммит</h1>
+            <p>Опишите проблему или выберите раздел — библиотека предложит конкретные действия.</p>
+          </div>
+          <div class="compact-stat"><strong>59</strong><span>разобранных ситуаций</span></div>
+        </div>
+      </div>
+      <div class="page-surface">
+        <div class="container">
+          <div class="search-panel rescue-search-panel">
+            <label class="search-field"><span class="search-icon" aria-hidden="true">⌕</span><input id="rescueSearch" type="search" placeholder="Например: ведущий отменил участие, мало регистраций…"><span class="search-count" id="rescueResultCount"></span></label>
+            <div class="chip-row" id="rescueCategories"></div>
+          </div>
+          <div class="rescue-results" id="rescueResults"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="format-dialog" id="formatDialog">
+    <div class="dialog-head"><div><p class="eyebrow" id="dialogLine"></p><h2 id="dialogTitle"></h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть">×</button></div>
+    <div class="dialog-body" id="dialogBody"></div>
+    <div class="dialog-footer"><button class="button primary" id="dialogAdd" type="button"></button></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><div><span class="brand-pill">ДЕЛАЙ-САММИТ</span><p>Практическая библиотека для организаторов</p></div><button class="text-button" type="button" data-route="home">На главную ↑</button></div>
+  </footer>
+
+  <script src="data/library-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

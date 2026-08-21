@@ -1,0 +1,31 @@
+{
+  "style_source": "Карта проектных лидеров и сообществ + брендбук ГРАНИ + шаблон Делай-саммита",
+  "colors": {
+    "brand_red": "#E51A4B",
+    "summit_navy": "#0B1734",
+    "summit_line_blue": "#262262",
+    "brand_slate": "#7A87A2",
+    "brand_light_blue": "#C8D3DF",
+    "surface": "#FFFFFF",
+    "page_background": "#F5F7FC",
+    "border": "#DDE3EC",
+    "text_muted": "#667180",
+    "black": "#000000"
+  },
+  "typography": {
+    "family": "Clear Sans, Arial, sans-serif",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "shape": {
+    "card_radius_px": 20,
+    "control_radius_px": 999,
+    "shadow": "0 16px 40px rgba(11, 23, 52, 0.08)"
+  },
+  "hero": {
+    "image": "assets/images/background.jpg",
+    "treatment": "right-aligned line illustration on white"
+  }
+}

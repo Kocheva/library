@@ -1,0 +1,35 @@
+{
+  "product": {
+    "title": "Библиотека организатора Делай-саммита",
+    "brand_label": "ДЕЛАЙ-САММИТ",
+    "hero_image": "assets/images/background.jpg"
+  },
+  "routes": [
+    {
+      "id": "program",
+      "order": 1,
+      "title": "Собрать программу",
+      "path": "#/formats"
+    },
+    {
+      "id": "prepare",
+      "order": 2,
+      "title": "Подготовить саммит",
+      "path": "#/guide"
+    },
+    {
+      "id": "rescue",
+      "order": 3,
+      "title": "Спасти Делай-саммит",
+      "path": "#/rescue"
+    },
+    {
+      "id": "leaders_map",
+      "order": 4,
+      "title": "Карта лидеров проектов и сообществ",
+      "url": "https://kocheva.github.io/map/",
+      "external": true,
+      "status": "pilot"
+    }
+  ]
+}
