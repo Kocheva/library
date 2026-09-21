@@ -1,6 +1,68 @@
 (function () {
   "use strict";
 
+  // ПАРОЛЬ САЙТА: замените значение между кавычками и опубликуйте сайт заново.
+  const SITE_PASSWORD = "start";
+  const ACCESS_SESSION_KEY = "delai_summit_library_access_v1";
+
+  function accessMarker(password) {
+    let hash = 5381;
+    for (let index = 0; index < password.length; index += 1) {
+      hash = ((hash << 5) + hash) ^ password.charCodeAt(index);
+    }
+    return `v1-${(hash >>> 0).toString(36)}`;
+  }
+
+  function unlockSite(shouldFocus = false) {
+    const gate = document.querySelector("#accessGate");
+    const shell = document.querySelector("#siteShell");
+    document.body.classList.remove("auth-locked");
+    gate.hidden = true;
+    shell.removeAttribute("inert");
+    shell.removeAttribute("aria-hidden");
+    if (shouldFocus) window.requestAnimationFrame(() => document.querySelector(".brand")?.focus());
+  }
+
+  function initAccessGate() {
+    const marker = accessMarker(SITE_PASSWORD);
+    let granted = false;
+    try { granted = sessionStorage.getItem(ACCESS_SESSION_KEY) === marker; } catch {}
+    if (granted) {
+      unlockSite();
+      return;
+    }
+
+    const form = document.querySelector("#accessForm");
+    const input = document.querySelector("#accessPassword");
+    const toggle = document.querySelector("#accessToggle");
+    const error = document.querySelector("#accessError");
+
+    window.requestAnimationFrame(() => input.focus());
+    toggle.addEventListener("click", () => {
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      toggle.textContent = show ? "Скрыть" : "Показать";
+      toggle.setAttribute("aria-pressed", String(show));
+      input.focus();
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (input.value === SITE_PASSWORD) {
+        try { sessionStorage.setItem(ACCESS_SESSION_KEY, marker); } catch {}
+        input.removeAttribute("aria-invalid");
+        error.textContent = "";
+        unlockSite(true);
+        return;
+      }
+      input.setAttribute("aria-invalid", "true");
+      error.textContent = "Неверный пароль. Проверьте ввод и попробуйте ещё раз.";
+      input.select();
+    });
+  }
+
+  initAccessGate();
+
   const data = window.DELAI_LIBRARY_DATA;
   if (!data) {
     document.body.innerHTML = "<p style='padding:32px'>Не удалось загрузить данные библиотеки.</p>";

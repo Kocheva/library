@@ -12,7 +12,31 @@
   <title>Библиотека организатора Делай-саммита</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="auth-locked">
+  <section class="access-gate" id="accessGate" aria-labelledby="accessTitle">
+    <div class="access-card">
+      <div class="access-copy">
+        <span class="brand-pill">ДЕЛАЙ-САММИТ</span>
+        <p class="eyebrow">БИБЛИОТЕКА ОРГАНИЗАТОРА</p>
+        <h1 id="accessTitle">Материалы для подготовки саммита</h1>
+        <p class="access-lead">Введите пароль, чтобы открыть библиотеку форматов, конструктор программы и рабочие материалы.</p>
+        <form class="access-form" id="accessForm" novalidate>
+          <label for="accessPassword">Пароль</label>
+          <div class="access-input-row">
+            <input id="accessPassword" name="password" type="password" autocomplete="current-password" required aria-describedby="accessError">
+            <button class="access-toggle" id="accessToggle" type="button" aria-pressed="false">Показать</button>
+          </div>
+          <button class="button primary full" type="submit">Войти в библиотеку</button>
+          <p class="access-error" id="accessError" role="alert" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="access-art" aria-hidden="true">
+        <img src="assets/images/background.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <div id="siteShell" inert aria-hidden="true">
   <a class="skip-link" href="#main">Перейти к содержанию</a>
 
   <header class="site-header">
@@ -268,8 +292,21 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <footer class="site-footer">
-    <div class="container footer-inner"><div><span class="brand-pill">ДЕЛАЙ-САММИТ</span><p>Практическая библиотека для организаторов</p></div><button class="text-button" type="button" data-route="home">На главную ↑</button></div>
+    <div class="container footer-inner">
+      <section class="footer-resources" aria-labelledby="footerResourcesTitle">
+        <h2 id="footerResourcesTitle">Ресурсы проекта</h2>
+        <nav class="footer-links" aria-label="Ресурсы проекта">
+          <a href="https://kocheva.github.io/library/" target="_blank" rel="noopener">Библиотека организатора мероприятий <span aria-hidden="true">↗</span></a>
+          <a href="https://kocheva.github.io/map/#/methodology">Источники</a>
+        </nav>
+      </section>
+      <section class="footer-project" aria-label="Сведения о проекте">
+        <p>Создано в рамках проекта «Делай-саммиты. Ресурсный альянс НКО: практика совместных действий» при поддержке <a href="https://fondtimchenko.ru/" target="_blank" rel="noopener">Фонда Тимченко</a> в рамках конкурса «Время действовать».</p>
+        <a class="footer-grani" href="https://grany-center.org/" target="_blank" rel="noopener">Центр ГРАНИ <span aria-hidden="true">↗</span></a>
+      </section>
+    </div>
   </footer>
+  </div>
 
   <script src="data/library-data.js"></script>
   <script src="app.js"></script>
