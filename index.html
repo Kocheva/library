@@ -11,6 +11,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Библиотека организатора Делай-саммита</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="partners.css">
 </head>
 <body class="auth-locked">
   <section class="access-gate" id="accessGate" aria-labelledby="accessTitle">
@@ -250,11 +251,29 @@
 
           <div class="guide-view" id="partnersView" hidden>
             <div class="tool-heading">
-              <div><p class="eyebrow">РАБОТА С ПАРТНЁРАМИ</p><h2>Реестр партнёров</h2><p>Пример структуры для учёта вклада, обязательств, контактов и статусов.</p></div>
-              <div class="tool-actions"><a class="button secondary" href="tools/xlsx/partners-register.xlsx" download>Скачать XLSX</a><a class="button ghost" href="https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
+              <div><p class="eyebrow">РАБОТА С ПАРТНЁРАМИ</p><h2>Реестр партнёров</h2><p>Запишите своих партнёров, договорённости и контакты. Отмечайте выполненные шаги по мере подготовки.</p></div>
+              <div class="tool-actions"><button class="button primary" id="exportPartners" type="button">Скачать мой реестр · XLSX</button><a class="button ghost" href="https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing" target="_blank" rel="noopener">Посмотреть пример заполнения ↗</a></div>
             </div>
-            <label class="search-field partner-search"><span class="search-icon" aria-hidden="true">⌕</span><input id="partnerSearch" type="search" placeholder="Найти партнёра или вклад"></label>
-            <div class="partner-grid" id="partnerGrid"></div>
+            <div class="partners-notice">
+              <p>Реестр сохраняется автоматически в этом браузере на этом устройстве. На общем компьютере он доступен другим пользователям браузера. Скачивайте XLSX, чтобы сохранить копию: очистка данных браузера удалит реестр.</p>
+              <span id="partnerSaveStatus" role="status" aria-live="polite">Готов к заполнению</span>
+            </div>
+            <div class="partners-warning" id="partnerStorageWarning" role="alert" hidden></div>
+            <div class="partners-toolbar">
+              <button class="button secondary" id="addPartner" type="button">+ Добавить партнёра</button>
+              <span id="partnerCount"></span>
+              <button class="text-button" id="clearPartners" type="button">Очистить реестр</button>
+            </div>
+            <p class="partners-table-hint" id="partnerTableHint">Таблицу можно прокручивать вправо. Типов вклада может быть несколько; статус и галочки меняются независимо.</p>
+            <div class="partners-scroll" tabindex="0" role="region" aria-label="Таблица партнёров" aria-describedby="partnerTableHint">
+              <table class="partners-table">
+                <caption class="partners-sr-only">Ваш реестр партнёров. Все поля можно оставить пустыми.</caption>
+                <thead id="partnerTableHead"></thead>
+                <tbody id="partnerRows"></tbody>
+              </table>
+            </div>
+            <div class="partners-undo" id="partnerUndo" hidden><span id="partnerUndoText" role="status"></span><button class="text-button" id="undoPartnerDelete" type="button">Отменить удаление</button></div>
+            <p class="partners-export-note">В XLSX попадут только заполненные строки. Галочки сохраняются как «Да» / «Нет», выбранные типы вклада — в одной ячейке.</p>
           </div>
         </div>
       </div>
@@ -309,6 +328,8 @@
   </div>
 
   <script src="data/library-data.js"></script>
+  <script src="partners-model.js"></script>
+  <script src="partners.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -299,21 +299,52 @@
       : '<div class="selection-placeholder">Нажимайте «+» на карточках — выбранные форматы появятся здесь.</div>';
   }
 
+  function renderFormatMaterials(item) {
+    const labels = {
+      org_checklist: "Чек-лист организатора",
+      fac_checklist: "Чек-лист ведущего",
+      scenario: "Сценарий"
+    };
+    const order = Object.keys(labels);
+    const separator = '<span class="format-material-separator" aria-hidden="true">·</span>';
+    const fileLink = (label, type, href) => `<a href="${esc(href)}" ${type === "pdf" ? 'target="_blank" rel="noopener"' : "download"} aria-label="${esc(label)} — ${type.toUpperCase()}${type === "pdf" ? " (откроется в новой вкладке)" : " (скачать)"}">${type.toUpperCase()}</a>`;
+    const row = (label, links) => `<li class="format-material-row"><span>${esc(label)}</span><span class="format-material-options">${separator}${links.join(separator)}</span></li>`;
+    const rows = (item.materials || []).filter((material) => material.available).slice()
+      .sort((a, b) => order.indexOf(a.key) - order.indexOf(b.key))
+      .map((material) => {
+        const label = labels[material.key] || material.label;
+        const files = material.files || {};
+        const links = ["pdf", "docx"].flatMap((type) => {
+          const href = files[type] || (material.file?.toLowerCase().endsWith(`.${type}`) ? material.file : null);
+          return href ? [fileLink(label, type, href)] : [];
+        });
+        return links.length ? row(label, links) : "";
+      }).filter(Boolean);
+    if (item.full_description_pdf) {
+      rows.push(row("Полное описание", [fileLink("Полное описание", "pdf", item.full_description_pdf)]));
+    } else {
+      // Keep access to the existing full description until its PDF is supplied.
+      const googleDescription = (item.external_urls || []).find((url) => /^https:\/\/(docs|drive)\.google\.com\//.test(url));
+      if (googleDescription) rows.push(row("Полное описание", [`<a href="${esc(googleDescription)}" target="_blank" rel="noopener">Google Документ ↗</a>`]));
+    }
+    const materialsSection = rows.length ? `<section class="dialog-section"><h3>Материалы для проведения</h3><ul class="format-material-list">${rows.join("")}</ul></section>` : "";
+    const detailsSection = item.grani_url ? `<section class="dialog-section"><h3>Подробнее</h3><a class="format-source-link" href="${esc(item.grani_url)}" target="_blank" rel="noopener">Материал Центра ГРАНИ ↗</a></section>` : "";
+    return materialsSection + detailsSection;
+  }
+
   function openFormatDialog(id) {
     const item = formatById.get(id);
     if (!item) return;
     state.dialogFormatId = id;
     $("#dialogLine").textContent = (item.lines || ["ФОРМАТ"])[0];
     $("#dialogTitle").textContent = item.title;
-    const materials = item.materials || [];
     const description = item.description || formatDescription(item);
     const examples = item.examples;
-    const external = (item.external_urls || [])[0];
     $("#dialogBody").innerHTML = `
       <p class="dialog-description">${esc(description).replaceAll("\n", "<br>")}</p>
       ${(item.tasks || []).length ? `<section class="dialog-section"><h3>Какие задачи решает</h3><div class="tag-list">${item.tasks.map((task) => `<span class="tag">${esc(task)}</span>`).join("")}</div></section>` : ""}
       ${examples ? `<section class="dialog-section"><h3>Как использовать</h3><p>${esc(examples).replaceAll("\n", "<br>")}</p></section>` : ""}
-      <section class="dialog-section"><h3>Материалы</h3><div class="material-links">${materials.length ? materials.map((material) => material.available ? `<a class="material-link" href="${esc(material.file)}" download>${esc(material.label)}</a>` : `<span class="material-link unavailable">${esc(material.label)} · будет добавлено</span>`).join("") : '<span class="material-link unavailable">Локальные материалы будут добавлены</span>'}${external ? `<a class="material-link" href="${esc(external)}" target="_blank" rel="noopener">Источник ↗</a>` : ""}</div></section>`;
+      ${renderFormatMaterials(item)}`;
     const selected = state.selection.includes(id);
     $("#dialogAdd").textContent = selected ? "Удалить из программы" : "Добавить в программу";
     $("#formatDialog").showModal();
@@ -504,21 +535,8 @@
     storage.set("delai_budget_v1", state.budget);
   }
 
-  function partnerValue(value) {
-    if (value === true) return "Да";
-    if (value === false) return "Нет";
-    return value ?? "—";
-  }
-
   function renderPartners() {
-    const query = norm($("#partnerSearch").value);
-    const fields = data.partners.fields;
-    const matches = data.partners.examples.filter((example) => !query || norm(Object.values(example).join(" ")).includes(query));
-    $("#partnerGrid").innerHTML = matches.map((example) => {
-      const completed = ["field_06", "field_07", "field_08", "field_09", "field_10", "field_11"].filter((key) => example[key]).length;
-      const visibleFields = fields.slice(1, 5).concat(fields.slice(11));
-      return `<article class="partner-card"><p class="eyebrow">${esc(example.field_04 || "ПАРТНЁР")}</p><h3>${esc(example.field_01 || "Без названия")}</h3><div class="partner-fields">${visibleFields.map((field) => `<div class="partner-field"><span>${esc(field.label)}</span><strong>${esc(partnerValue(example[field.key]))}</strong></div>`).join("")}<div class="partner-field"><span>Шагов завершено</span><strong>${completed} из 6</strong></div></div></article>`;
-    }).join("") || '<div class="empty-state"><strong>Партнёр не найден</strong><p>Попробуйте другой запрос.</p></div>';
+    window.DelaiPartners.init();
   }
 
   function initGuide() {
@@ -576,7 +594,6 @@
       state.budget = { limit: data.budget.limit, rows: structuredClone(data.budget.rows) };
       renderBudget();
     });
-    $("#partnerSearch").addEventListener("input", renderPartners);
     renderStages();
     renderPlan();
     renderBudget();
