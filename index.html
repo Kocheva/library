@@ -12,6 +12,7 @@
   <title>Библиотека организатора Делай-саммита</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="partners.css">
+  <link rel="stylesheet" href="checklists.css">
 </head>
 <body class="auth-locked">
   <section class="access-gate" id="accessGate" aria-labelledby="accessTitle">
@@ -202,7 +203,7 @@
           <div>
             <p class="eyebrow">МАРШРУТ 02</p>
             <h1>Подготовка Делай-саммита</h1>
-            <p>Методическое руководство, рабочий план, бюджет и реестр партнёров в одном месте.</p>
+            <p>Методическое руководство, рабочий план, бюджет, чек-листы и реестр партнёров в одном месте.</p>
           </div>
           <div class="compact-stat"><strong id="planProgressHero">0%</strong><span>задач выполнено</span></div>
         </div>
@@ -213,6 +214,7 @@
             <button class="active" type="button" data-guide-view="manual">Руководство</button>
             <button type="button" data-guide-view="plan">План задач</button>
             <button type="button" data-guide-view="budget">Бюджет</button>
+            <button type="button" data-guide-view="checklists">Чек-листы</button>
             <button type="button" data-guide-view="partners">Партнёры</button>
           </div>
 
@@ -247,6 +249,39 @@
             </div>
             <div class="table-scroll"><table class="budget-table"><thead><tr><th>Статья расходов</th><th>Количество</th><th>Стоимость</th><th>Потребность</th><th>Вклад партнёров</th><th>Из бюджета</th><th></th></tr></thead><tbody id="budgetRows"></tbody></table></div>
             <div class="row-actions"><button class="button secondary" id="addBudgetRow" type="button">+ Добавить статью</button><button class="text-button" id="resetBudget" type="button">Вернуть пример</button></div>
+          </div>
+
+          <div class="guide-view" id="checklistsView" hidden>
+            <div class="checklists-intro">
+              <h2>Чек-листы подготовки</h2>
+              <p>Откройте нужный список и отмечайте выполненные пункты. Если пункт не относится к вашему мероприятию, выберите «Не требуется».</p>
+              <p class="checklists-help">Отметки сохраняются только в этом браузере на этом устройстве. Очистка данных браузера удалит их. DOCX — чистый шаблон без ваших отметок.</p>
+              <p class="checklists-help">Финальную проверку проходите заново: её отметки не зависят от остальных списков.</p>
+            </div>
+            <span id="checklistSaveStatus" role="status" aria-live="polite"></span>
+            <div class="checklists-warning" id="checklistStorageWarning" role="alert" hidden></div>
+            <div class="checklist-cards" id="checklistCards"></div>
+            <section class="checklist-resources" aria-labelledby="checklistResourcesTitle">
+              <h3 id="checklistResourcesTitle">Дополнительные материалы Центра ГРАНИ</h3>
+              <p>Чек-листы для организаторов и спикеров на отдельном ресурсе Центра ГРАНИ. Ссылки открываются в новой вкладке.</p>
+              <a class="checklist-constructor-link" href="https://generator.grany-center.org/all-solutions/constructor-for-organizing" target="_blank" rel="noopener">Конструктор для организации и проведения публичных мероприятий ↗</a>
+              <div class="checklist-resource-groups">
+                <section><h4>Организатору</h4><ul>
+                  <li><a href="https://generator.grany-center.org/all-solutions/project-manager-organizer/checklist-junior-organizer" target="_blank" rel="noopener">Чек-лист начинающего организатора событий ↗</a></li>
+                  <li><a href="https://generator.grany-center.org/all-solutions/constructor-for-organizing/event-report" target="_blank" rel="noopener">Чек-лист: как подготовить отчёт о мероприятии ↗</a></li>
+                </ul></section>
+                <section><h4>Выступления и презентации</h4><ul>
+                  <li><a href="https://generator.grany-center.org/all-solutions/constructor-for-organizing/checklist-which-help-speaker-sub" target="_blank" rel="noopener">Чек-лист для спикера: готовимся к выступлению ↗</a></li>
+                  <li><a href="https://generator.grany-center.org/all-solutions/constructor-for-organizing/good-presentation" target="_blank" rel="noopener">Чек-лист: как подготовить хорошую презентацию ↗</a></li>
+                  <li><a href="https://generator.grany-center.org/all-solutions/constructor-for-organizing/performance-quality" target="_blank" rel="noopener">Чек-лист для оценки качества выступления ↗</a></li>
+                </ul></section>
+                <section><h4>Онлайн-мероприятия</h4><ul>
+                  <li><a href="https://generator.grany-center.org/speaker-online" target="_blank" rel="noopener">Чек-лист: работа со спикерами во время онлайн-мероприятий ↗</a></li>
+                  <li><a href="https://generator.grany-center.org/all-solutions/constructor-for-organizing/for-the-speaker-online" target="_blank" rel="noopener">Чек-лист для спикера онлайн-мероприятия ↗</a></li>
+                  <li><a href="https://generator.grany-center.org/all-solutions/constructor-for-organizing/online-meeting" target="_blank" rel="noopener">Чек-лист: как провести онлайн-встречу эффективно ↗</a></li>
+                </ul></section>
+              </div>
+            </section>
           </div>
 
           <div class="guide-view" id="partnersView" hidden>
@@ -330,6 +365,9 @@
   <script src="data/library-data.js"></script>
   <script src="partners-model.js"></script>
   <script src="partners.js"></script>
+  <script src="data/checklists-data.js"></script>
+  <script src="checklists-model.js"></script>
+  <script src="checklists.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

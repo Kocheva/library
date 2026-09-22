@@ -164,7 +164,7 @@
   }
 
   function setGuideView(view) {
-    const valid = ["manual", "plan", "budget", "partners"];
+    const valid = ["manual", "plan", "budget", "checklists", "partners"];
     state.guideView = valid.includes(view) ? view : "manual";
     $$(".guide-view").forEach((panel) => { panel.hidden = panel.id !== `${state.guideView}View`; });
     $$('[data-guide-view]').forEach((button) => {
@@ -172,12 +172,25 @@
     });
     if (state.guideView === "plan") renderPlan();
     if (state.guideView === "budget") renderBudget();
+    if (state.guideView === "checklists") {
+      window.DelaiChecklists.init();
+      if (!location.hash.startsWith("#guide/checklists")) history.replaceState(null, "", "#guide/checklists");
+    } else if (location.hash.startsWith("#guide/checklists")) history.replaceState(null, "", "#guide");
     if (state.guideView === "partners") renderPartners();
     window.scrollTo({ top: 250, behavior: "smooth" });
   }
 
   function initRouting() {
     document.addEventListener("click", (event) => {
+      const checklistTarget = event.target.closest("[data-open-checklist]");
+      if (checklistTarget) {
+        event.preventDefault();
+        const id = checklistTarget.dataset.openChecklist;
+        activateRoute("guide", false);
+        setGuideView("checklists");
+        if (window.DelaiChecklists.open(id)) history.replaceState(null, "", `#guide/checklists/${id}`);
+        return;
+      }
       const routeTarget = event.target.closest("[data-route]");
       if (routeTarget) {
         const route = routeTarget.dataset.route;
@@ -198,7 +211,12 @@
       $("#menuToggle").setAttribute("aria-expanded", String(open));
     });
     const initial = location.hash.replace("#", "") || "home";
-    activateRoute(initial, false);
+    if (initial === "guide/checklists" || initial.startsWith("guide/checklists/")) {
+      activateRoute("guide", false);
+      setGuideView("checklists");
+      const id = initial.split("/")[2];
+      if (id) window.DelaiChecklists.open(id);
+    } else activateRoute(initial, false);
   }
 
   function populateFormatFilters() {
@@ -470,11 +488,17 @@
     return `<p>${esc(block.text).replaceAll("\n", "<br>")}${links}</p>`;
   }
 
+  function renderStageMaterial(material, stageId) {
+    const checklist = window.DELAI_CHECKLISTS_DATA.find((list) => list.stageId === stageId && list.materialKey === material.key);
+    if (checklist && material.available) return `<div class="stage-checklist-material"><strong>${esc(material.label)}</strong><div><button class="material-link" type="button" data-open-checklist="${esc(checklist.id)}">Открыть интерактивный чек-лист</button><a class="material-link" href="${esc(material.file)}" download>Шаблон · DOCX</a></div></div>`;
+    return material.available ? `<a class="material-link" href="${esc(material.file)}" download>${esc(material.label)}</a>` : `<span class="material-link unavailable">${esc(material.label)} · будет добавлено</span>`;
+  }
+
   function renderStages() {
     $("#stageNav").innerHTML = data.stages.map((stage) => `<button class="stage-button ${stage.id === state.stageId ? "active" : ""}" type="button" data-stage-id="${esc(stage.id)}"><span>${String(stage.order).padStart(2, "0")}</span><span><strong>${esc(stage.short_title)}</strong><small>${esc(stage.when_to_start)}</small></span></button>`).join("");
     const stage = data.stages.find((item) => item.id === state.stageId) || data.stages[0];
     const materialItems = stage.expected_materials || stage.materials || [];
-    const materialSection = materialItems.length ? `<section class="material-section"><p class="eyebrow">ПРИЛОЖЕНИЯ ЭТАПА</p><div class="material-links">${materialItems.map((material) => material.available ? `<a class="material-link" href="${esc(material.file)}" download>${esc(material.label)}</a>` : `<span class="material-link unavailable">${esc(material.label)} · будет добавлено</span>`).join("")}</div></section>` : "";
+    const materialSection = materialItems.length ? `<section class="material-section"><p class="eyebrow">ПРИЛОЖЕНИЯ ЭТАПА</p><div class="material-links">${materialItems.map((material) => renderStageMaterial(material, stage.id)).join("")}</div></section>` : "";
     const next = data.stages[stage.order] || null;
     $("#stageContent").innerHTML = `<div class="stage-meta"><span>Этап ${stage.order} из ${data.stages.length}</span><span>${esc(stage.when_to_start)}</span></div><h2>${esc(stage.title)}</h2><p class="manual-lead">${esc(stage.summary)}</p><div class="manual-content">${(stage.content || []).map(renderBlock).join("")}</div>${materialSection}${next ? `<div class="next-stage"><div><span class="eyebrow">СЛЕДУЮЩИЙ ЭТАП</span><strong>${esc(next.title)}</strong></div><button class="button secondary small" type="button" data-stage-id="${esc(next.id)}">Продолжить →</button></div>` : ""}`;
   }
