@@ -92,6 +92,7 @@
     visibleFormats: 18,
     selection: storage.get("delai_program_selection_v1", []),
     programMeta: storage.get("delai_program_meta_v1", {}),
+    programDetails: storage.get("delai_program_details_v1", {}),
     planState: storage.get("delai_plan_state_v1", {}),
     budget: storage.get("delai_budget_v1", null),
     stageId: storage.get("delai_stage_v1", data.stages[0].id),
@@ -137,10 +138,11 @@
   function persistProgram() {
     storage.set("delai_program_selection_v1", state.selection);
     storage.set("delai_program_meta_v1", state.programMeta);
+    storage.set("delai_program_details_v1", state.programDetails);
   }
 
   function activateRoute(route, pushHash = true) {
-    if (!["home", "formats", "guide", "rescue"].includes(route)) route = "home";
+    if (!["home", "formats", "guide", "rescue", "sources"].includes(route)) route = "home";
     state.route = route;
     $$(".route-page").forEach((page) => page.classList.toggle("active", page.dataset.page === route));
     $$(".main-nav [data-route]").forEach((item) => item.classList.toggle("active", item.dataset.route === route));
@@ -211,11 +213,11 @@
       $("#menuToggle").setAttribute("aria-expanded", String(open));
     });
     const initial = location.hash.replace("#", "") || "home";
-    if (initial === "guide/checklists" || initial.startsWith("guide/checklists/")) {
+    if (initial.startsWith("guide/")) {
       activateRoute("guide", false);
-      setGuideView("checklists");
-      const id = initial.split("/")[2];
-      if (id) window.DelaiChecklists.open(id);
+      const [, view, id] = initial.split("/");
+      setGuideView(view);
+      if (view === "checklists" && id) window.DelaiChecklists.open(id);
     } else activateRoute(initial, false);
   }
 
@@ -285,9 +287,9 @@
   function defaultProgramMeta(item) {
     return {
       day: "День 1",
-      start: "10:00",
+      start: "",
       duration: 60,
-      place: (item.places || [])[0] || "Основная площадка"
+      place: ""
     };
   }
 
@@ -379,12 +381,13 @@
       <div class="program-title"><strong>${esc(item.title)}</strong><span>${esc((item.tasks || []).slice(0, 2).join(" · "))}</span></div>
       <label>День<select data-program-field="day"><option${meta.day === "День 1" ? " selected" : ""}>День 1</option><option${meta.day === "День 2" ? " selected" : ""}>День 2</option><option${meta.day === "День 3" ? " selected" : ""}>День 3</option><option${meta.day === "День 4" ? " selected" : ""}>День 4</option></select></label>
       <label>Начало<input type="time" data-program-field="start" value="${esc(meta.start)}"></label>
-      <label>Минут<input type="number" min="10" step="5" data-program-field="duration" value="${Number(meta.duration) || 60}"></label>
+      <label>Минут<input type="number" min="1" step="1" data-program-field="duration" value="${esc(meta.duration)}"></label>
       <label>Площадка<input type="text" data-program-field="place" value="${esc(meta.place)}"></label>
       <button class="program-remove" type="button" data-remove-program>Удалить</button>
     </div>`).join("");
     const totalMinutes = rows.reduce((sum, row) => sum + (Number(row.meta.duration) || 0), 0);
     const days = unique(rows.map((row) => row.meta.day));
+    updateProgramDateFields(days.length);
     $("#programSummary").innerHTML = `<div><span>Форматов</span><strong>${rows.length}</strong></div><div><span>Общая длительность</span><strong>${Math.floor(totalMinutes / 60)} ч ${totalMinutes % 60} мин</strong></div><div><span>Дней</span><strong>${days.length}</strong></div><div><span>Сценариев и чек-листов</span><strong>${rows.reduce((sum, row) => sum + (row.item.materials || []).filter((m) => m.available).length, 0)}</strong></div>`;
   }
 
@@ -397,33 +400,59 @@
     renderProgram();
   }
 
-  function csvCell(value) {
-    return `"${String(value ?? "").replaceAll('"', '""')}"`;
+  function updateProgramDateFields(dayCount) {
+    if (dayCount === undefined) dayCount = new Set(state.selection.map(id => (state.programMeta[id] || defaultProgramMeta(formatById.get(id))).day)).size;
+    $("#programDateLabel").textContent = dayCount > 1 ? "Дата начала" : "Дата";
+    $("#programEndDateField").hidden = dayCount < 2;
+    $("#programDetails [name=dateEnd]").disabled = dayCount < 2;
+    $("#programDetails [name=dateEnd]").min = $("#programDetails [name=dateStart]").value;
   }
 
-  function downloadBlob(filename, content, type) {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 500);
-  }
-
-  function exportProgram() {
-    if (!state.selection.length) return showToast("Сначала добавьте форматы");
-    const header = ["Порядок", "День", "Время", "Продолжительность, мин", "Площадка", "Формат", "Задачи"];
-    const rows = state.selection.map((id, index) => {
-      const item = formatById.get(id);
-      const meta = state.programMeta[id] || defaultProgramMeta(item);
-      return [index + 1, meta.day, meta.start, meta.duration, meta.place, item.title, (item.tasks || []).join("; ")];
+  function captureProgramInputs() {
+    $$("#programDetails input").forEach(input => { state.programDetails[input.name] = input.value; });
+    $$("#programList [data-program-id]").forEach(row => {
+      const meta = state.programMeta[row.dataset.programId] ||= defaultProgramMeta(formatById.get(row.dataset.programId));
+      $$('[data-program-field]', row).forEach(input => { meta[input.dataset.programField] = input.value; });
     });
-    const csv = "\ufeff" + [header, ...rows].map((row) => row.map(csvCell).join(";")).join("\r\n");
-    downloadBlob("programma-delai-summit.csv", csv, "text/csv;charset=utf-8");
+    persistProgram();
+    updateProgramDateFields();
+  }
+
+  function currentProgram() {
+    captureProgramInputs();
+    return window.DelaiProgramExport.buildModel(state.selection.map(id => ({ item: formatById.get(id), meta: state.programMeta[id] || defaultProgramMeta(formatById.get(id)) })), state.programDetails);
+  }
+
+  function programExportError(message) {
+    $("#programExportStatus").textContent = message;
+    $("#programExportStatus").classList.add("is-error");
+  }
+
+  async function exportProgram() {
+    if (!state.selection.length) return showToast("Сначала добавьте форматы");
+    const button = $("#exportProgram"), status = $("#programExportStatus");
+    if (button.disabled) return;
+    status.textContent = ""; status.classList.remove("is-error");
+    captureProgramInputs();
+    if (!$("#programDetails").reportValidity() || !$$("#programList input").every(input => input.reportValidity())) return;
+    const label = button.textContent;
+    try {
+      const model = currentProgram();
+      button.disabled = true; button.textContent = "Готовим DOCX…"; button.setAttribute("aria-busy", "true");
+      await window.DelaiProgramExport.download(model);
+      status.textContent = "DOCX подготовлен. Пустые поля можно заполнить в скачанном документе.";
+    } catch (error) {
+      programExportError(error.message || "Не удалось создать DOCX. Попробуйте ещё раз — ваша программа сохранена.");
+    } finally {
+      button.disabled = false; button.textContent = label; button.removeAttribute("aria-busy");
+    }
   }
 
   function initFormats() {
+    if (!state.programDetails || typeof state.programDetails !== "object") state.programDetails = {};
+    $$("#programDetails input").forEach(input => { input.value = state.programDetails[input.name] || ""; });
+    $("#programDetails").addEventListener("submit", event => event.preventDefault());
+    $("#programDetails").addEventListener("input", captureProgramInputs);
     populateFormatFilters();
     ["#formatSearch", "#lineFilter", "#taskFilter", "#placeFilter"].forEach((selector) => $(selector).addEventListener("input", () => renderFormats(true)));
     $("#clearFormatFilters").addEventListener("click", () => {
@@ -466,16 +495,45 @@
       const row = event.target.closest("[data-program-id]");
       if (!field || !row) return;
       state.programMeta[row.dataset.programId] ||= defaultProgramMeta(formatById.get(row.dataset.programId));
-      state.programMeta[row.dataset.programId][field] = field === "duration" ? Number(event.target.value) : event.target.value;
+      state.programMeta[row.dataset.programId][field] = event.target.value;
       persistProgram();
-      if (field === "duration") renderProgram();
+      if (field === "duration" || field === "day") renderProgram();
     });
+    $("#programList").addEventListener("input", captureProgramInputs);
     $("#exportProgram").addEventListener("click", exportProgram);
-    $("#printProgram").addEventListener("click", () => { if (state.selection.length) window.print(); else showToast("Сначала добавьте форматы"); });
+    $("#printProgram").addEventListener("click", () => {
+      if (!state.selection.length) return showToast("Сначала добавьте форматы");
+      captureProgramInputs();
+      if (!$("#programDetails").reportValidity() || !$$("#programList input").every(input => input.reportValidity())) return;
+      try {
+        $("#programPrint").innerHTML = window.DelaiProgramExport.printHTML(currentProgram());
+        $("#programExportStatus").textContent = "";
+        window.print();
+      } catch (error) { programExportError(error.message); }
+    });
+    window.addEventListener("beforeprint", () => {
+      try { $("#programPrint").innerHTML = state.selection.length ? window.DelaiProgramExport.printHTML(currentProgram()) : ""; }
+      catch (error) { $("#programPrint").textContent = error.message; }
+    });
     renderFormats();
   }
 
   function renderBlock(block) {
+    if (block.type === "resources") {
+      return `<section class="guide-resource-section"><h3>${esc(block.title)}</h3><ul class="guide-resource-list">${(block.items || []).map((item) => {
+        let label;
+        if (item.kind === "internal") {
+          label = `<a href="#guide/${esc(item.view)}" data-route="guide" data-guide-view="${esc(item.view)}">${esc(item.label)}</a>`;
+        } else if (item.kind === "download") {
+          label = `<a href="${esc(item.url)}" download>${esc(item.label)} <span class="resource-format">· ${esc(item.format)}</span></a>`;
+        } else if (item.kind === "external") {
+          label = `<a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.label)} <span aria-hidden="true">↗</span></a>`;
+        } else {
+          label = `<span>${esc(item.label)}</span>${item.note ? `<span class="resource-note">${esc(item.note)}</span>` : ""}`;
+        }
+        return `<li>${label}${item.description ? `<p class="resource-description">${esc(item.description)}</p>` : ""}</li>`;
+      }).join("")}</ul></section>`;
+    }
     if (block.type === "heading") {
       const level = block.level === 3 ? "h3" : "h2";
       return `<${level}>${esc(block.text)}</${level}>`;
@@ -497,13 +555,13 @@
   function renderStages() {
     $("#stageNav").innerHTML = data.stages.map((stage) => `<button class="stage-button ${stage.id === state.stageId ? "active" : ""}" type="button" data-stage-id="${esc(stage.id)}"><span>${String(stage.order).padStart(2, "0")}</span><span><strong>${esc(stage.short_title)}</strong><small>${esc(stage.when_to_start)}</small></span></button>`).join("");
     const stage = data.stages.find((item) => item.id === state.stageId) || data.stages[0];
-    const materialItems = stage.expected_materials || stage.materials || [];
+    const materialItems = stage.show_materials === false ? [] : (stage.expected_materials || stage.materials || []);
     const materialSection = materialItems.length ? `<section class="material-section"><p class="eyebrow">ПРИЛОЖЕНИЯ ЭТАПА</p><div class="material-links">${materialItems.map((material) => renderStageMaterial(material, stage.id)).join("")}</div></section>` : "";
     const next = data.stages[stage.order] || null;
     $("#stageContent").innerHTML = `<div class="stage-meta"><span>Этап ${stage.order} из ${data.stages.length}</span><span>${esc(stage.when_to_start)}</span></div><h2>${esc(stage.title)}</h2><p class="manual-lead">${esc(stage.summary)}</p><div class="manual-content">${(stage.content || []).map(renderBlock).join("")}</div>${materialSection}${next ? `<div class="next-stage"><div><span class="eyebrow">СЛЕДУЮЩИЙ ЭТАП</span><strong>${esc(next.title)}</strong></div><button class="button secondary small" type="button" data-stage-id="${esc(next.id)}">Продолжить →</button></div>` : ""}`;
   }
 
-  const statusLabels = { not_started: "Не начато", in_progress: "В работе", blocked: "Заблокировано", done: "Выполнено" };
+  const statusLabels = window.DelaiWorkbookExports.PLAN_STATUSES;
 
   function taskState(task) {
     return state.planState[task.id] || { status: task.default_status || "not_started", responsible: task.responsible || "" };
@@ -563,6 +621,35 @@
     window.DelaiPartners.init();
   }
 
+  function exportPlan() {
+    // Берём весь план, независимо от поиска и фильтров; фиксируем данные до загрузки XLSX-модуля.
+    const snapshot = data.plan.tasks.map((task) => ({ ...task, ...taskState(task) }));
+    window.DelaiWorkbookExports.download({
+      button: $("#exportPlan"), status: $("#planExportStatus"), filename: "moy-plan-podgotovki",
+      build: (ExcelJS) => window.DelaiWorkbookExports.createPlanWorkbook(ExcelJS, snapshot)
+    });
+  }
+
+  function exportBudget() {
+    // Учитываем последний ввод, даже если поле ещё не потеряло фокус.
+    const byId = new Map(state.budget.rows.map((row) => [String(row.id), row]));
+    $$("#budgetRows tr[data-budget-id]").forEach((rowElement) => {
+      const row = byId.get(rowElement.dataset.budgetId);
+      if (!row) return;
+      $$("[data-budget-field]", rowElement).forEach((input) => {
+        const field = input.dataset.budgetField;
+        row[field] = field === "title" ? input.value : Number(input.value) || 0;
+      });
+    });
+    state.budget.limit = Number($("#budgetLimit").value) || 0;
+    renderBudget();
+    const snapshot = structuredClone(state.budget);
+    window.DelaiWorkbookExports.download({
+      button: $("#exportBudget"), status: $("#budgetExportStatus"), filename: "moy-byudzhet",
+      build: (ExcelJS) => window.DelaiWorkbookExports.createBudgetWorkbook(ExcelJS, snapshot)
+    });
+  }
+
   function initGuide() {
     $("#stageNav").addEventListener("click", (event) => {
       const button = event.target.closest("[data-stage-id]");
@@ -581,6 +668,8 @@
       window.scrollTo({ top: 250, behavior: "smooth" });
     });
     $("#planSearch").addEventListener("input", renderPlan);
+    $("#exportPlan").addEventListener("click", exportPlan);
+    $("#exportBudget").addEventListener("click", exportBudget);
     $("#planStatusFilter").addEventListener("change", renderPlan);
     $("#planGroups").addEventListener("input", (event) => {
       const field = event.target.dataset.taskField;

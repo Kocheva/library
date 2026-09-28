@@ -181,10 +181,20 @@
             <div class="builder-head">
               <div><p class="eyebrow">КОНСТРУКТОР</p><h2>Моя программа</h2><p>Укажите день, время, продолжительность и площадку. Порядок можно менять стрелками.</p></div>
               <div class="builder-actions">
-                <button class="button secondary" id="exportProgram" type="button">Скачать CSV</button>
+                <button class="button secondary" id="exportProgram" type="button">Скачать мою программу DOCX</button>
                 <button class="button primary" id="printProgram" type="button">Печать / PDF</button>
               </div>
             </div>
+            <form class="program-details" id="programDetails" aria-label="Сведения о мероприятии">
+              <label class="program-detail-wide">Название мероприятия<input name="title" type="text" placeholder="Введите название" maxlength="300"></label>
+              <label class="program-detail-wide">Место проведения<input name="place" type="text" placeholder="Город, площадка, адрес" maxlength="500"></label>
+              <label><span id="programDateLabel">Дата</span><input name="dateStart" type="date" aria-label="Дата начала"></label>
+              <label id="programEndDateField" hidden>Дата окончания<input name="dateEnd" type="date"></label>
+              <label>Время начала<input name="timeStart" type="time"></label>
+              <label>Время окончания<input name="timeEnd" type="time"></label>
+              <p class="program-details-hint">В документ попадут только дни, выбранные у форматов. Укажите дату или период и время проведения, например с 10:00 до 18:00. Незаполненные сведения можно вписать в DOCX после скачивания. Изменения сохраняются в этом браузере.</p>
+            </form>
+            <p id="programExportStatus" class="program-export-status" role="status" aria-live="polite"></p>
             <div class="program-empty empty-state" id="programEmpty">
               <strong>Подборка пока пуста</strong>
               <p>Вернитесь в каталог и добавьте форматы, которые подходят задачам саммита.</p>
@@ -192,6 +202,7 @@
             </div>
             <div class="program-list" id="programList"></div>
             <div class="program-summary" id="programSummary"></div>
+            <article id="programPrint" class="program-print" aria-label="Программа для печати"></article>
           </div>
         </div>
       </div>
@@ -228,8 +239,9 @@
           <div class="guide-view" id="planView" hidden>
             <div class="tool-heading">
               <div><p class="eyebrow">33 ЗАДАЧИ</p><h2>Рабочий план подготовки</h2><p>Статусы и ответственные сохраняются только на этом устройстве.</p></div>
-              <div class="tool-actions"><a class="button secondary" href="tools/xlsx/preparation-plan.xlsx" download>Скачать XLSX</a><a class="button ghost" href="https://docs.google.com/spreadsheets/d/15j5mgoghk5MHY-ZPMmnCwTmmBAGn2pomtwavbuixBio/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
+              <div class="tool-actions"><button class="button secondary" id="exportPlan" type="button">Скачать мой план · XLSX</button><a class="button ghost" href="https://docs.google.com/spreadsheets/d/15j5mgoghk5MHY-ZPMmnCwTmmBAGn2pomtwavbuixBio/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
             </div>
+            <p class="tool-export-status" id="planExportStatus" role="status" aria-live="polite"></p>
             <div class="progress-card"><div><span>Общий прогресс</span><strong id="planProgressText">0 из 33</strong></div><div class="progress-track"><span id="planProgressBar"></span></div></div>
             <div class="plan-filters"><input id="planSearch" type="search" placeholder="Поиск по задачам"><select id="planStatusFilter"><option value="">Все статусы</option><option value="not_started">Не начато</option><option value="in_progress">В работе</option><option value="blocked">Заблокировано</option><option value="done">Выполнено</option></select></div>
             <div class="plan-groups" id="planGroups"></div>
@@ -238,8 +250,9 @@
           <div class="guide-view" id="budgetView" hidden>
             <div class="tool-heading">
               <div><p class="eyebrow">КАЛЬКУЛЯТОР</p><h2>Бюджет мероприятия</h2><p>Изменяйте значения — итог пересчитается автоматически и сохранится в браузере.</p></div>
-              <div class="tool-actions"><a class="button secondary" href="tools/xlsx/budget.xlsx" download>Скачать XLSX</a><a class="button ghost" href="https://docs.google.com/spreadsheets/d/19An8k5DxcDUnxBA4VS9_pG0BAJ1CqyZ72Ul18y0cO0Q/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
+              <div class="tool-actions"><button class="button secondary" id="exportBudget" type="button">Скачать мой бюджет · XLSX</button><a class="button ghost" href="https://docs.google.com/spreadsheets/d/19An8k5DxcDUnxBA4VS9_pG0BAJ1CqyZ72Ul18y0cO0Q/edit?usp=sharing" target="_blank" rel="noopener">Открыть Google-таблицу ↗</a></div>
             </div>
+            <p class="tool-export-status" id="budgetExportStatus" role="status" aria-live="polite"></p>
             <div class="budget-kpis">
               <label class="budget-limit">Лимит бюджета<input id="budgetLimit" type="number" min="0" step="1000"></label>
               <div><span>Общая потребность</span><strong id="budgetNeed">0 ₽</strong></div>
@@ -287,7 +300,7 @@
           <div class="guide-view" id="partnersView" hidden>
             <div class="tool-heading">
               <div><p class="eyebrow">РАБОТА С ПАРТНЁРАМИ</p><h2>Реестр партнёров</h2><p>Запишите своих партнёров, договорённости и контакты. Отмечайте выполненные шаги по мере подготовки.</p></div>
-              <div class="tool-actions"><button class="button primary" id="exportPartners" type="button">Скачать мой реестр · XLSX</button><a class="button ghost" href="https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing" target="_blank" rel="noopener">Посмотреть пример заполнения ↗</a></div>
+              <div class="tool-actions"><button class="button secondary" id="exportPartners" type="button">Скачать мой реестр · XLSX</button><a class="button ghost" href="https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing" target="_blank" rel="noopener">Посмотреть пример заполнения ↗</a></div>
             </div>
             <div class="partners-notice">
               <p>Реестр сохраняется автоматически в этом браузере на этом устройстве. На общем компьютере он доступен другим пользователям браузера. Скачивайте XLSX, чтобы сохранить копию: очистка данных браузера удалит реестр.</p>
@@ -335,6 +348,38 @@
         </div>
       </div>
     </section>
+    <section class="route-page" id="route-sources" data-page="sources" aria-labelledby="sourcesTitle">
+      <div class="compact-hero">
+        <div class="container compact-hero-inner">
+          <div>
+            <p class="eyebrow">РЕСУРСЫ ЦЕНТРА ГРАНИ</p>
+            <h1 id="sourcesTitle">Источники</h1>
+            <p>Методические материалы по управлению, коммуникациям и сотрудничеству НКО.</p>
+          </div>
+        </div>
+      </div>
+      <div class="page-surface">
+        <div class="container sources-content">
+          <section class="sources-group" aria-labelledby="sourcesManagementTitle">
+            <h2 id="sourcesManagementTitle">Управление и коммуникации</h2>
+            <ul class="source-list">
+              <li><a href="https://generator.grany-center.org/all-solutions/information-support" target="_blank" rel="noopener">Конструктор по информационному сопровождению и продвижению деятельности организации и проектов <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://generator.grany-center.org/all-solutions/ngo-practikal-guide" target="_blank" rel="noopener">Практический справочник по управлению организацией <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </section>
+          <section class="sources-group" aria-labelledby="sourcesCooperationTitle">
+            <h2 id="sourcesCooperationTitle">Партнёрство и деловая кооперация</h2>
+            <ul class="source-list">
+              <li><a href="https://generator.grany-center.org/all-solutions/instrumenty-razvitiya" target="_blank" rel="noopener">Инструменты развития делового партнёрства НКО <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://cooperation.grany-center.org/" target="_blank" rel="noopener">Сайт «Деловая кооперация НКО» <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://drive.google.com/file/d/10MzWWNkYevVgGYa2AS-AgLQQoT4UTTGI/view" target="_blank" rel="noopener">Методические рекомендации некоммерческой организации по внедрению в своей деятельности деловой кооперации с другими НКО <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://drive.google.com/file/d/1FXAG8KVicji2HEnn1mNELKRCClx6-buY/view" target="_blank" rel="noopener">Технология проведения Партенариата — биржи кооперации для НКО и ресурсных центров поддержки СОНКО <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://drive.google.com/file/d/1p-58W3Url2P3SWMPs8sghdNsg8oC3xLt/view" target="_blank" rel="noopener">Практический справочник консультанта по деловой кооперации НКО <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
   </main>
 
   <dialog class="format-dialog" id="formatDialog">
@@ -351,7 +396,7 @@
         <h2 id="footerResourcesTitle">Ресурсы проекта</h2>
         <nav class="footer-links" aria-label="Ресурсы проекта">
           <a href="https://kocheva.github.io/library/" target="_blank" rel="noopener">Библиотека организатора мероприятий <span aria-hidden="true">↗</span></a>
-          <a href="https://kocheva.github.io/map/#/methodology">Источники</a>
+          <a href="#sources" data-route="sources">Источники</a>
         </nav>
       </section>
       <section class="footer-project" aria-label="Сведения о проекте">
@@ -368,6 +413,8 @@
   <script src="data/checklists-data.js"></script>
   <script src="checklists-model.js"></script>
   <script src="checklists.js"></script>
+  <script src="workbook-exports.js"></script>
+  <script src="program-export.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

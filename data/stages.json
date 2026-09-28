@@ -80,13 +80,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Для мероприятий меньшего масштаба, продолжительностью 1-2 дня, число членов команды можно сократить при условии совмещения ролей. За каждой зоной ответственности должен быть закреплен конкретный человек. Чтобы ни одна задача не потерялась, мы собрали их в таблицу, где вы сможете заранее оценить нагрузку и увидеть распределение задач во времени.",
-        "links": [
-          {
-            "label": "таблицу",
-            "url": "https://docs.google.com/spreadsheets/d/15j5mgoghk5MHY-ZPMmnCwTmmBAGn2pomtwavbuixBio/edit?gid=0#gid=0"
-          }
-        ]
+        "text": "Для мероприятий меньшего масштаба, продолжительностью 1-2 дня, число членов команды можно сократить при условии совмещения ролей. За каждой зоной ответственности должен быть закреплен конкретный человек. Чтобы ни одна задача не потерялась, мы собрали их в рабочий план подготовки, где вы сможете заранее оценить нагрузку и увидеть распределение задач во времени."
       },
       {
         "type": "paragraph",
@@ -169,13 +163,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Примерная логика этапов подготовки и соответствующая тематика рабочих встреч команды доступна по ссылке Этапы и диаграмма Ганта. На каждом этапе подготовки команда смотрит в таймлайн, чтобы понимать, что уже сделано, что ещё впереди и к каким срокам нужно принять основные решения. Если базовые вопросы не закрыты к запланированному этапу, команда возвращается к их обсуждению и корректирует дальнейшие шаги подготовки.",
-        "links": [
-          {
-            "label": "Этапы и диаграмма Ганта",
-            "url": "https://docs.google.com/document/d/1ce90NHKDHFO-HLQAbLnFODoM26qZioCReJlu9uLNUCk/edit?usp=sharing"
-          }
-        ]
+        "text": "Основные шаги и сроки подготовки собраны в рабочем плане подготовки. На каждом этапе подготовки команда смотрит в таймлайн, чтобы понимать, что уже сделано, что ещё впереди и к каким срокам нужно принять основные решения. Если базовые вопросы не закрыты к запланированному этапу, команда возвращается к их обсуждению и корректирует дальнейшие шаги подготовки."
       },
       {
         "type": "paragraph",
@@ -221,40 +209,39 @@
         "text": "Во время проведения саммита региональный координатор остаётся доступным для консультаций координатора и команды, если возникают сложные или нестандартные ситуации. Его задача — не управлять процессом, а поддерживать команду и помогать принимать взвешенные решения."
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Шаблоны документов и рабочие инструменты команды"
-      },
-      {
-        "type": "list",
-        "ordered": false,
+        "type": "resources",
+        "title": "Инструменты",
         "items": [
           {
-            "text": "План подготовки - таблица задач и таймлайн",
-            "links": [
-              {
-                "label": "План подготовки - таблица задач и таймлайн",
-                "url": "https://docs.google.com/spreadsheets/d/15j5mgoghk5MHY-ZPMmnCwTmmBAGn2pomtwavbuixBio/edit?usp=sharing"
-              }
-            ]
+            "kind": "internal",
+            "label": "Рабочий план подготовки",
+            "view": "plan"
+          }
+        ]
+      },
+      {
+        "type": "resources",
+        "title": "Дополнительные материалы Центра ГРАНИ",
+        "items": [
+          {
+            "kind": "external",
+            "label": "Чек-лист качественного виртуального (удалённого) офиса",
+            "url": "https://generator.grany-center.org/all-solutions/ngo-practikal-guide/virtual-office"
           },
           {
-            "text": "Таблица бюджета подготовки (план / факт)",
-            "links": [
-              {
-                "label": "Таблица бюджета подготовки (план / факт)",
-                "url": "https://docs.google.com/spreadsheets/d/19An8k5DxcDUnxBA4VS9_pG0BAJ1CqyZ72Ul18y0cO0Q/edit?usp=sharing"
-              }
-            ]
+            "kind": "external",
+            "label": "Чек-лист «Как давать поручения»",
+            "url": "https://generator.grany-center.org/all-solutions/ngo-practikal-guide/errands"
           },
           {
-            "text": "Этапы и диаграмма Ганта",
-            "links": [
-              {
-                "label": "Этапы и диаграмма Ганта",
-                "url": "https://docs.google.com/document/d/1ce90NHKDHFO-HLQAbLnFODoM26qZioCReJlu9uLNUCk/edit?usp=sharing"
-              }
-            ]
+            "kind": "external",
+            "label": "Практическое руководство по работе с волонтерами",
+            "url": "https://generator.grany-center.org/all-solutions/work-with-volunteers"
+          },
+          {
+            "kind": "external",
+            "label": "Конструктор по информационному сопровождению",
+            "url": "https://generator.grany-center.org/all-solutions/information-support"
           }
         ]
       }
@@ -384,76 +371,98 @@
         "text": "После завершения саммита команде важно поблагодарить партнеров и зафиксировать результаты: что удалось реализовать совместно и есть ли потенциал для продолжения сотрудничества."
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Шаблоны документов и рабочие инструменты команды"
-      },
-      {
-        "type": "list",
-        "ordered": false,
+        "type": "resources",
+        "title": "Инструменты",
         "items": [
           {
-            "text": "Шаблоны писем партнёрам (первый контакт и описания предложения о сотрудничестве)"
+            "kind": "internal",
+            "label": "Реестр партнёров",
+            "view": "partners"
+          }
+        ]
+      },
+      {
+        "type": "resources",
+        "title": "Шаблоны",
+        "items": [
+          {
+            "kind": "download",
+            "label": "Шаблоны писем партнёрам (первый контакт и описание предложения о сотрудничестве)",
+            "url": "materials/docs/stages/partners_search/partner_letter.docx",
+            "format": "DOCX"
           },
           {
-            "text": "Образец соглашения о сотрудничестве (условия и обязательства сторон)"
+            "kind": "download",
+            "label": "Образец соглашения о сотрудничестве (условия и обязательства сторон)",
+            "url": "materials/docs/stages/partners_search/cooperation_agreement.docx",
+            "format": "DOCX"
           },
           {
-            "text": "Реестр партнёров",
-            "links": [
-              {
-                "label": "Реестр партнёров",
-                "url": "https://docs.google.com/spreadsheets/d/1ZdAYJqJUcqG7_ZofbK1B-rQJOxWYRty80AhQC8711C4/edit?usp=sharing"
-              }
-            ]
+            "kind": "download",
+            "label": "Благодарственное письмо",
+            "url": "materials/docs/stages/partners_search/thank_you_letter.docx",
+            "format": "DOCX"
+          }
+        ]
+      },
+      {
+        "type": "resources",
+        "title": "Дополнительные материалы Центра ГРАНИ",
+        "items": [
+          {
+            "kind": "external",
+            "label": "Инструменты развития делового партнёрства НКО",
+            "url": "https://generator.grany-center.org/all-solutions/instrumenty-razvitiya"
           },
           {
-            "text": "Благодарственное письмо"
+            "kind": "download",
+            "label": "Шаблон соглашения о совместной деятельности",
+            "url": "materials/docs/stages/partners_search/joint_activity_agreement.docx",
+            "format": "DOCX"
+          },
+          {
+            "kind": "external",
+            "label": "Чек-лист «Как подготовиться к встрече со спонсором»",
+            "url": "https://generator.grany-center.org/all-solutions/ngo-practikal-guide/meeting-with-sponsor"
+          },
+          {
+            "kind": "external",
+            "label": "Чек-лист о координации совместной деятельности при реализации партнёрских проектов",
+            "url": "https://generator.grany-center.org/all-solutions/project-manager-organizer/cooperative-activity"
+          },
+          {
+            "kind": "external",
+            "label": "Сайт «Деловая кооперация НКО»",
+            "url": "https://cooperation.grany-center.org/"
+          },
+          {
+            "kind": "external",
+            "label": "Методические рекомендации некоммерческой организации по внедрению в своей деятельности деловой кооперации с другими НКО",
+            "url": "https://drive.google.com/file/d/10MzWWNkYevVgGYa2AS-AgLQQoT4UTTGI/view"
           }
         ]
       }
     ],
-    "materials": [],
-    "expected_materials": [
+    "materials": [
       {
         "key": "partner_letter",
-        "label": "Письмо партнёру",
+        "label": "Шаблоны писем партнёрам (первый контакт и описание предложения о сотрудничестве)",
         "file": "materials/docs/stages/partners_search/partner_letter.docx",
         "files": {
           "source": "materials/docs/stages/partners_search/partner_letter.docx",
           "pdf": null
         },
-        "available": false
+        "available": true
       },
       {
         "key": "cooperation_agreement",
-        "label": "Образец соглашения о сотрудничестве",
+        "label": "Образец соглашения о сотрудничестве (условия и обязательства сторон)",
         "file": "materials/docs/stages/partners_search/cooperation_agreement.docx",
         "files": {
           "source": "materials/docs/stages/partners_search/cooperation_agreement.docx",
           "pdf": null
         },
-        "available": false
-      },
-      {
-        "key": "partner_memo",
-        "label": "Памятка для партнёра",
-        "file": "materials/docs/stages/partners_search/partner_memo.docx",
-        "files": {
-          "source": "materials/docs/stages/partners_search/partner_memo.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "partners_registry",
-        "label": "Реестр партнёров",
-        "file": "materials/docs/stages/partners_search/partners_registry.xlsx",
-        "files": {
-          "source": "materials/docs/stages/partners_search/partners_registry.xlsx",
-          "pdf": null
-        },
-        "available": false
+        "available": true
       },
       {
         "key": "thank_you_letter",
@@ -463,10 +472,63 @@
           "source": "materials/docs/stages/partners_search/thank_you_letter.docx",
           "pdf": null
         },
-        "available": false
+        "available": true
+      },
+      {
+        "key": "joint_activity_agreement",
+        "label": "Шаблон соглашения о совместной деятельности",
+        "file": "materials/docs/stages/partners_search/joint_activity_agreement.docx",
+        "files": {
+          "source": "materials/docs/stages/partners_search/joint_activity_agreement.docx",
+          "pdf": null
+        },
+        "available": true
       }
     ],
-    "source": "Как организовать и провести Делай-саммит (3).docx"
+    "expected_materials": [
+      {
+        "key": "partner_letter",
+        "label": "Шаблоны писем партнёрам (первый контакт и описание предложения о сотрудничестве)",
+        "file": "materials/docs/stages/partners_search/partner_letter.docx",
+        "files": {
+          "source": "materials/docs/stages/partners_search/partner_letter.docx",
+          "pdf": null
+        },
+        "available": true
+      },
+      {
+        "key": "cooperation_agreement",
+        "label": "Образец соглашения о сотрудничестве (условия и обязательства сторон)",
+        "file": "materials/docs/stages/partners_search/cooperation_agreement.docx",
+        "files": {
+          "source": "materials/docs/stages/partners_search/cooperation_agreement.docx",
+          "pdf": null
+        },
+        "available": true
+      },
+      {
+        "key": "thank_you_letter",
+        "label": "Благодарственное письмо",
+        "file": "materials/docs/stages/partners_search/thank_you_letter.docx",
+        "files": {
+          "source": "materials/docs/stages/partners_search/thank_you_letter.docx",
+          "pdf": null
+        },
+        "available": true
+      },
+      {
+        "key": "joint_activity_agreement",
+        "label": "Шаблон соглашения о совместной деятельности",
+        "file": "materials/docs/stages/partners_search/joint_activity_agreement.docx",
+        "files": {
+          "source": "materials/docs/stages/partners_search/joint_activity_agreement.docx",
+          "pdf": null
+        },
+        "available": true
+      }
+    ],
+    "source": "Как организовать и провести Делай-саммит (3).docx",
+    "show_materials": false
   },
   {
     "id": "program_design",
@@ -1000,22 +1062,28 @@
         ]
       },
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Документы и инструменты для работы с ведущими"
-      },
-      {
-        "type": "list",
-        "ordered": false,
+        "type": "resources",
+        "title": "Документы и инструменты для работы с ведущими",
         "items": [
           {
-            "text": "Шаблон приглашения ведущему помогает сразу задать формат, роль и ожидания."
+            "kind": "unavailable",
+            "label": "Шаблон приглашения ведущему",
+            "description": "Помогает сразу задать формат, роль и ожидания."
           },
           {
-            "text": "Памятка ведущего содержит цель мероприятия, формат, тайминг, аудиторию, контакты ответственных."
+            "kind": "unavailable",
+            "label": "Памятка ведущего",
+            "description": "Содержит цель мероприятия, формат, тайминг, аудиторию, контакты ответственных."
           },
           {
-            "text": "Контактный лист используется для координации и оперативной связи."
+            "kind": "unavailable",
+            "label": "Контактный лист",
+            "description": "Используется для координации и оперативной связи."
+          },
+          {
+            "kind": "external",
+            "label": "Карта лидеров",
+            "url": "https://kocheva.github.io/map/"
           }
         ]
       }
@@ -1063,7 +1131,8 @@
         "available": false
       }
     ],
-    "source": "Как организовать и провести Делай-саммит (3).docx"
+    "source": "Как организовать и провести Делай-саммит (3).docx",
+    "show_materials": false
   },
   {
     "id": "travel_and_accommodation",
@@ -1410,26 +1479,6 @@
       {
         "type": "paragraph",
         "text": "В ряде случаев площадка может выступать не только местом проведения, но и партнёром саммита. Это может быть выражено в гибкости условий, помощи с навигацией, предоставлении дополнительных ресурсов или поддержке работы с участниками. Такие возможности имеет смысл обсуждать заранее и учитывать при выборе площадки."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Документы и шаблоны"
-      },
-      {
-        "type": "list",
-        "ordered": false,
-        "items": [
-          {
-            "text": "Чек-лист выбора площадки",
-            "links": [
-              {
-                "label": "Чек-лист выбора площадки",
-                "url": "https://docs.google.com/document/d/1RgIWZ3yXm65z_Gx5EEtBgNxmI1yuWEqrXGcBSW-GDMs/edit?usp=sharing"
-              }
-            ]
-          }
-        ]
       }
     ],
     "materials": [
@@ -1690,16 +1739,6 @@
           "pdf": null
         },
         "available": true
-      },
-      {
-        "key": "contact_sheet",
-        "label": "Контактный лист",
-        "file": "materials/docs/stages/final_preparation/contact_sheet.xlsx",
-        "files": {
-          "source": "materials/docs/stages/final_preparation/contact_sheet.xlsx",
-          "pdf": null
-        },
-        "available": false
       }
     ],
     "source": "Как организовать и провести Делай-саммит (3).docx"
@@ -2344,128 +2383,55 @@
         "text": "Поддержка регистрации и напоминания помогают избежать «потерь» участников и дают более предсказуемый состав групп."
       },
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Документы и шаблоны"
-      },
-      {
-        "type": "list",
-        "ordered": false,
+        "type": "resources",
+        "title": "Инструменты",
         "items": [
           {
-            "text": "Анонс (под площадки)"
-          },
+            "kind": "download",
+            "label": "Коммуникационный календарь — приглашение участников Делай-саммита",
+            "url": "materials/docs/stages/participants_engagement/communication_calendar.xlsx",
+            "format": "XLSX"
+          }
+        ]
+      },
+      {
+        "type": "resources",
+        "title": "Дополнительные материалы Центра ГРАНИ",
+        "items": [
           {
-            "text": "Приглашение (по целевым группам)"
-          },
-          {
-            "text": "Напоминание"
-          },
-          {
-            "text": "Письмо с итогами (пост-комманикация)"
-          },
-          {
-            "text": "Шаблоны писем информационным партнёрам"
-          },
-          {
-            "text": "Коммуникационный календарь"
-          },
-          {
-            "text": "Инструменты для регистрации участников"
-          },
-          {
-            "text": "Инструкция участнику"
-          },
-          {
-            "text": "Итоговый пресс-релиз"
+            "kind": "external",
+            "label": "Конструктор по информационному сопровождению",
+            "url": "https://generator.grany-center.org/all-solutions/information-support"
           }
         ]
       }
     ],
-    "materials": [],
-    "expected_materials": [
-      {
-        "key": "announcement",
-        "label": "Анонс",
-        "file": "materials/docs/stages/participants_engagement/announcement.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/announcement.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "invitation",
-        "label": "Приглашение",
-        "file": "materials/docs/stages/participants_engagement/invitation.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/invitation.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "reminder",
-        "label": "Напоминание",
-        "file": "materials/docs/stages/participants_engagement/reminder.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/reminder.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "summary_letter",
-        "label": "Письмо с итогами",
-        "file": "materials/docs/stages/participants_engagement/summary_letter.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/summary_letter.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "media_partner_letter",
-        "label": "Письмо информационному партнёру",
-        "file": "materials/docs/stages/participants_engagement/media_partner_letter.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/media_partner_letter.docx",
-          "pdf": null
-        },
-        "available": false
-      },
+    "materials": [
       {
         "key": "communication_calendar",
-        "label": "Коммуникационный календарь",
+        "label": "Коммуникационный календарь — приглашение участников Делай-саммита",
         "file": "materials/docs/stages/participants_engagement/communication_calendar.xlsx",
         "files": {
           "source": "materials/docs/stages/participants_engagement/communication_calendar.xlsx",
           "pdf": null
         },
-        "available": false
-      },
-      {
-        "key": "participant_guide",
-        "label": "Инструкция участнику",
-        "file": "materials/docs/stages/participants_engagement/participant_guide.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/participant_guide.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "press_release",
-        "label": "Итоговый пресс-релиз",
-        "file": "materials/docs/stages/participants_engagement/press_release.docx",
-        "files": {
-          "source": "materials/docs/stages/participants_engagement/press_release.docx",
-          "pdf": null
-        },
-        "available": false
+        "available": true
       }
     ],
-    "source": "Как организовать и провести Делай-саммит (3).docx"
+    "expected_materials": [
+      {
+        "key": "communication_calendar",
+        "label": "Коммуникационный календарь — приглашение участников Делай-саммита",
+        "file": "materials/docs/stages/participants_engagement/communication_calendar.xlsx",
+        "files": {
+          "source": "materials/docs/stages/participants_engagement/communication_calendar.xlsx",
+          "pdf": null
+        },
+        "available": true
+      }
+    ],
+    "source": "Как организовать и провести Делай-саммит (3).docx",
+    "show_materials": false
   },
   {
     "id": "summit_execution",
@@ -2832,86 +2798,100 @@
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Шаблоны документов"
-      },
-      {
-        "type": "list",
-        "ordered": false,
+        "type": "resources",
+        "title": "Шаблоны документов",
         "items": [
           {
-            "text": "Памятка организатора (поминутка дня, ключевой документ)"
+            "kind": "download",
+            "label": "Памятка организатора (поминутка дня, ключевой документ)",
+            "url": "materials/docs/stages/summit_execution/organizer_memo.docx",
+            "format": "DOCX"
           },
           {
-            "text": "Форма регистрации участников"
+            "kind": "download",
+            "label": "Лист фиксации результатов активности (для сессии)",
+            "url": "materials/docs/stages/summit_execution/results_sheet.docx",
+            "format": "DOCX"
           },
           {
-            "text": "Анкета обратной связи"
+            "kind": "unavailable",
+            "label": "Форма регистрации участников",
+            "note": "Будет добавлено"
           },
           {
-            "text": "Лист фиксации результатов активности (на каждую сессию)"
+            "kind": "unavailable",
+            "label": "Анкета обратной связи",
+            "note": "Будет добавлено"
           },
           {
-            "text": "Контактный лист"
+            "kind": "unavailable",
+            "label": "Контактный лист"
+          }
+        ]
+      },
+      {
+        "type": "resources",
+        "title": "Дополнительные материалы Центра ГРАНИ",
+        "items": [
+          {
+            "kind": "external",
+            "label": "Чек-лист, который поможет спикеру подготовиться к выступлению!",
+            "url": "https://generator.grany-center.org/all-solutions/constructor-for-organizing/checklist-which-help-speaker-sub"
+          },
+          {
+            "kind": "external",
+            "label": "Чек-лист «Работа со спикерами во время онлайн-мероприятий»",
+            "url": "https://generator.grany-center.org/speaker-online"
           }
         ]
       }
     ],
-    "materials": [],
-    "expected_materials": [
+    "materials": [
       {
         "key": "organizer_memo",
-        "label": "Памятка организатора",
+        "label": "Памятка организатора (поминутка дня, ключевой документ)",
         "file": "materials/docs/stages/summit_execution/organizer_memo.docx",
         "files": {
           "source": "materials/docs/stages/summit_execution/organizer_memo.docx",
           "pdf": null
         },
-        "available": false
-      },
-      {
-        "key": "registration_form",
-        "label": "Форма регистрации участников",
-        "file": "materials/docs/stages/summit_execution/registration_form.docx",
-        "files": {
-          "source": "materials/docs/stages/summit_execution/registration_form.docx",
-          "pdf": null
-        },
-        "available": false
-      },
-      {
-        "key": "feedback_form",
-        "label": "Анкета обратной связи",
-        "file": "materials/docs/stages/summit_execution/feedback_form.docx",
-        "files": {
-          "source": "materials/docs/stages/summit_execution/feedback_form.docx",
-          "pdf": null
-        },
-        "available": false
+        "available": true
       },
       {
         "key": "results_sheet",
-        "label": "Лист фиксации результатов активности",
+        "label": "Лист фиксации результатов активности (для сессии)",
         "file": "materials/docs/stages/summit_execution/results_sheet.docx",
         "files": {
           "source": "materials/docs/stages/summit_execution/results_sheet.docx",
           "pdf": null
         },
-        "available": false
-      },
-      {
-        "key": "contact_sheet",
-        "label": "Контактный лист",
-        "file": "materials/docs/stages/summit_execution/contact_sheet.xlsx",
-        "files": {
-          "source": "materials/docs/stages/summit_execution/contact_sheet.xlsx",
-          "pdf": null
-        },
-        "available": false
+        "available": true
       }
     ],
-    "source": "Как организовать и провести Делай-саммит (3).docx"
+    "expected_materials": [
+      {
+        "key": "organizer_memo",
+        "label": "Памятка организатора (поминутка дня, ключевой документ)",
+        "file": "materials/docs/stages/summit_execution/organizer_memo.docx",
+        "files": {
+          "source": "materials/docs/stages/summit_execution/organizer_memo.docx",
+          "pdf": null
+        },
+        "available": true
+      },
+      {
+        "key": "results_sheet",
+        "label": "Лист фиксации результатов активности (для сессии)",
+        "file": "materials/docs/stages/summit_execution/results_sheet.docx",
+        "files": {
+          "source": "materials/docs/stages/summit_execution/results_sheet.docx",
+          "pdf": null
+        },
+        "available": true
+      }
+    ],
+    "source": "Как организовать и провести Делай-саммит (3).docx",
+    "show_materials": false
   },
   {
     "id": "post_event_analysis",
@@ -3094,6 +3074,27 @@
       {
         "type": "paragraph",
         "text": "Цель: закрепить результаты, дать партнёрам и участникам инструменты для своей дальнейшей работы."
+      },
+      {
+        "type": "resources",
+        "title": "Дополнительные материалы Центра ГРАНИ",
+        "items": [
+          {
+            "kind": "external",
+            "label": "Чек-лист: как подготовить отчет о мероприятии",
+            "url": "https://generator.grany-center.org/all-solutions/constructor-for-organizing/event-report"
+          },
+          {
+            "kind": "external",
+            "label": "Чек-лист для оценки качества выступления",
+            "url": "https://generator.grany-center.org/all-solutions/constructor-for-organizing/performance-quality"
+          },
+          {
+            "kind": "external",
+            "label": "Чек-лист «Как выходим из проекта?»",
+            "url": "https://generator.grany-center.org/all-solutions/project-manager-organizer/checklist-out-from-project"
+          }
+        ]
       }
     ],
     "materials": [],
@@ -3139,7 +3140,8 @@
         "available": false
       }
     ],
-    "source": "Как организовать и провести Делай-саммит (3).docx"
+    "source": "Как организовать и провести Делай-саммит (3).docx",
+    "show_materials": false
   },
   {
     "id": "roadmap",
@@ -3404,28 +3406,59 @@
         "text": "Корректировки допустимы, если они не усложняют план и сохраняют его логику. Все действия команды соотносятся с дорожной картой."
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Документы и шаблоны"
-      },
-      {
-        "type": "list",
-        "ordered": false,
+        "type": "resources",
+        "title": "Документы и шаблоны",
         "items": [
           {
-            "text": "шаблон дорожной карты инициативы;"
+            "kind": "download",
+            "label": "Шаблон дорожной карты — Делай-саммит",
+            "url": "materials/docs/stages/roadmap/roadmap_template.docx",
+            "format": "DOCX"
           },
           {
-            "text": "мини-образцы заполнения для разных типов сервисов;"
-          },
+            "kind": "unavailable",
+            "label": "Памятка по фиксации данных и сверкам с наставником",
+            "note": "Будет добавлено"
+          }
+        ]
+      },
+      {
+        "type": "resources",
+        "title": "Дополнительные материалы Центра ГРАНИ",
+        "items": [
           {
-            "text": "памятка по фиксации данных и сверкам с наставником."
+            "kind": "external",
+            "label": "Чек-лист «От идеи к проекту»",
+            "url": "https://generator.grany-center.org/all-solutions/project-manager-organizer/from-idea-to-project"
           }
         ]
       }
     ],
-    "materials": [],
-    "expected_materials": [],
-    "source": "Как организовать и провести Делай-саммит (3).docx"
+    "materials": [
+      {
+        "key": "roadmap_template",
+        "label": "Шаблон дорожной карты — Делай-саммит",
+        "file": "materials/docs/stages/roadmap/roadmap_template.docx",
+        "files": {
+          "source": "materials/docs/stages/roadmap/roadmap_template.docx",
+          "pdf": null
+        },
+        "available": true
+      }
+    ],
+    "expected_materials": [
+      {
+        "key": "roadmap_template",
+        "label": "Шаблон дорожной карты — Делай-саммит",
+        "file": "materials/docs/stages/roadmap/roadmap_template.docx",
+        "files": {
+          "source": "materials/docs/stages/roadmap/roadmap_template.docx",
+          "pdf": null
+        },
+        "available": true
+      }
+    ],
+    "source": "Как организовать и провести Делай-саммит (3).docx",
+    "show_materials": false
   }
 ]
